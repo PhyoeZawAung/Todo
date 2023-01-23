@@ -6,34 +6,26 @@
           <div class="col-8 ">
             <input v-if="toggleEdit" v-model="title" class="form-control" @keyup.enter="editTask" />
             <span v-else :class="{ done: todo.done }">{{ todo.title }}</span>
-
-
           </div>
           <div class="col text-right">
-            <button :disabled="toggleEdit" class="btn btn-success align-items-center" @click="$emit('doneTask', todo.id)">
-
-              <span class="material-icons md-18">check</span>
-
+            <button :disabled="toggleEdit" class="btn btn-success align-items-center" 
+             @click="$emit('doneTask', todo.id)">
+                <span v-if="todo.done" class="material-icons md-18 icon-done">undo</span> 
+                <span v-else class="material-icons md-18">check</span>
             </button>
             <button :disabled="toggleEdit" class="btn btn-danger align-items-center" @click="$emit('deleteTask', todo.id)">
-
-              <span class="material-icons md-18">delete</span>
-
+                <span class="material-icons md-18">delete</span>
             </button>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
-
 </template>
 
 <script>
 export default {
   props: {
-
     todo: Object,
   },
   data: () => {
@@ -53,10 +45,8 @@ export default {
         return
       }
       this.toggleEdit = !this.toggleEdit
-
     },
     editTask() {
-
       this.toggle();
       this.$emit('editTask', { id: this.todo.id, title: this.title });
     }
@@ -80,4 +70,6 @@ export default {
 .btn-success {
   margin-right: 28px !important;
 }
+
+
 </style>
